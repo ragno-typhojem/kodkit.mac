@@ -9,7 +9,7 @@
     "type": "git",
     "url": "https://github.com/scratchfoundation/scratch-gui.git"
   },
-  "main": "./dist/scratch-gui.js",
+  "main": "main.js",
   "scripts": {
     "build": "npm run clean && webpack",
     "clean": "rimraf ./build ./dist",
@@ -18,13 +18,15 @@
     "prune": "./prune-gh-pages.sh",
     "i18n:push": "tx-push-src scratch-editor interface translations/en.json",
     "i18n:src": "rimraf ./translations/messages/src && babel src > tmp.js && rimraf tmp.js && build-i18n-src ./translations/messages/src ./translations/",
-    "start": "webpack serve",
     "test": "npm run test:lint && npm run test:unit && npm run build && npm run test:integration",
     "test:integration": "jest --maxWorkers=4 test[\\\\/]integration",
     "test:lint": "eslint . --ext .js,.jsx",
     "test:unit": "jest test[\\\\/]unit",
     "test:smoke": "jest --runInBand test[\\\\/]smoke",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "start": "electron .",
+    "start-electron": "electron .",
+    "package": "electron-packager . KODKIT --platform=win32 --arch=x64 --out=dist"
   },
   "config": {
     "commitizen": {
@@ -115,6 +117,8 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-loader": "9.2.1",
     "cheerio": "1.0.0-rc.3",
+    "electron": "^17.4.11",
+    "electron-packager": "^17.1.2",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.8",
     "eslint": "8.57.1",
