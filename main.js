@@ -1,8 +1,31 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+let mainWindow;
+let splash;
+
+function createSplash() {
+  splash = new BrowserWindow({
+    width: 600,
+    height: 400,
+    frame: false,
+    alwaysOnTop: true,
+    transparent: true
+  });
+
+  // Splash screen için src/anim.html dosyasını kullanıyoruz
+  // Klasör yapınızda "src" içinde "anim.html" gördüm
+  splash.loadFile(path.join(__dirname, 'src', 'anim.html'));
+
+  // Splash ekranı 3 saniye boyunca gösterilecek
+  setTimeout(() => {
+    splash.close();
+    createWindow();
+  }, 3000);
+}
+
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1280,
     height: 720,
     webPreferences: {
@@ -11,18 +34,24 @@ function createWindow() {
     }
   });
 
-  // Build klasöründeki index.html dosyasını yükle
-  win.loadFile(path.join(__dirname, 'build', 'index.html'));
+  // Klasör yapınıza göre static içindeki index.html dosyasını yükleyebilirsiniz
+  // veya scratch-gui içindeki bir HTML dosyasını
+  mainWindow.loadFile(path.join(__dirname, 'build', 'index.html'));
 
   // Geliştirici araçlarını açmak isterseniz aşağıdaki satırı yorum olmaktan çıkarın
-  // win.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
+  // Çarpı butonunun çalışması için
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
 }
 
 app.whenReady().then(() => {
-  createWindow();
+  createSplash();
 
   app.on('activate', function () {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    if (BrowserWindow.getAllWindows().length === 0) createSplash();
   });
 });
 
