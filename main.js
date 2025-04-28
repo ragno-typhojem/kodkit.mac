@@ -1,6 +1,6 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('path');
 
+const path = require('path');
+const { app, BrowserWindow, Menu } = require('electron');
 let mainWindow;
 let splash;
 
@@ -33,7 +33,7 @@ function createWindow() {
       contextIsolation: false
     }
   });
-
+  Menu.setApplicationMenu(null);
   // Klasör yapınıza göre static içindeki index.html dosyasını yükleyebilirsiniz
   // veya scratch-gui içindeki bir HTML dosyasını
   mainWindow.loadFile(path.join(__dirname, 'build', 'index.html'));

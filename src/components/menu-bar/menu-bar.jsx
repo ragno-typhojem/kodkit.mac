@@ -28,7 +28,7 @@ import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 import MenuBarHOC from '../../containers/menu-bar-hoc.jsx';
 import SettingsMenu from './settings-menu.jsx';
-
+import { Mail } from 'lucide-react';
 import {openTipsLibrary, openDebugModal} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
 import {
@@ -188,7 +188,8 @@ class MenuBar extends React.Component {
             'handleKeyPress',
             'handleRestoreOption',
             'getSaveToComputerHandler',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'handleClickEmail'
         ]);
     }
     componentDidMount () {
@@ -219,6 +220,13 @@ class MenuBar extends React.Component {
     handleClickSave () {
         this.props.onClickSave();
         this.props.onRequestCloseFile();
+    }
+    handleClickEmail() {
+        const email = "simseklermustafaberke@gmail.com";
+        const subject = "KODKIT Early Feedback";
+        const body = "Merhaba, KODKIT Early GUI hakkında geri bildirimlerim...";
+        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoLink;
     }
     handleClickSaveAsCopy () {
         this.props.onClickSaveAsCopy();
@@ -664,37 +672,15 @@ class MenuBar extends React.Component {
                                 <MenuBarItemTooltip id="share-button">
                                     <ShareButton className={styles.menuBarButton} />
                                 </MenuBarItemTooltip>
-                            ) : []
+                            ) :
+                            []
                         )}
                         {this.props.canRemix ? remixButton : []}
                     </div>
-                    <div className={classNames(styles.menuBarItem, styles.communityButtonWrapper)}>
-                        {this.props.enableCommunity ? (
-                            (this.props.isShowingProject || this.props.isUpdating) && (
-                                <ProjectWatcher onDoneUpdating={this.props.onSeeCommunity}>
-                                    {
-                                        waitForUpdate => (
-                                            <CommunityButton
-                                                className={styles.menuBarButton}
-                                                /* eslint-disable react/jsx-no-bind */
-                                                onClick={() => {
-                                                    this.handleClickSeeCommunity(waitForUpdate);
-                                                }}
-                                                /* eslint-enable react/jsx-no-bind */
-                                            />
-                                        )
-                                    }
-                                </ProjectWatcher>
-                            )
-                        ) : (this.props.showComingSoon ? (
-                            <MenuBarItemTooltip id="community-button">
-                                <CommunityButton className={styles.menuBarButton} />
-                            </MenuBarItemTooltip>
-                        ) : [])}
-                    </div>
+
                     <Divider className={classNames(styles.divider)} />
                     <div className={styles.fileGroup}>
-                        <div
+                        {/* <div
                             aria-label={this.props.intl.formatMessage(ariaMessages.tutorials)}
                             className={
                                 classNames(styles.menuBarItem, styles.noOffset, styles.hoverable, 'tutorials-button')
@@ -708,8 +694,8 @@ class MenuBar extends React.Component {
                             <span className={styles.tutorialsLabel}>
                                 <FormattedMessage {...ariaMessages.tutorials} />
                             </span>
-                        </div>
-                        <div
+                        </div> */}
+                        {/* <div
                             aria-label={this.props.intl.formatMessage(ariaMessages.debug)}
                             className={classNames(styles.menuBarItem, styles.noOffset, styles.hoverable)}
                             onClick={this.props.onOpenDebugModal}
@@ -721,13 +707,13 @@ class MenuBar extends React.Component {
                             <span className={styles.debugLabel}>
                                 <FormattedMessage {...ariaMessages.debug} />
                             </span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
                 {/* show the proper UI in the account menu, given whether the user is
                 logged in, and whether a session is available to log in with */}
-                <div className={styles.accountInfoGroup}>
+                {/* <div className={styles.accountInfoGroup}>
                     <div className={styles.menuBarItem}>
                         {this.props.canSave && (
                             <SaveStatus />
@@ -853,8 +839,23 @@ class MenuBar extends React.Component {
                             ) : []}
                         </React.Fragment>
                     )}
+                </div> */}
+                <div className={classNames(styles.menuBarItem, styles.hoverable)}>
+                    <Button
+                        className={styles.menuBarButton}
+                        iconClassName={styles.mailIcon}
+                        onClick={this.handleClickEmail}
+                    >
+                        <Mail className={styles.mailIcon} />
+                        <span className={styles.buttonText}>
+                        <FormattedMessage
+                            defaultMessage="İletişim"
+                            description="Button to contact developer"
+                            id="gui.menuBar.contactDeveloper"
+                        />
+                        </span>
+                    </Button>
                 </div>
-
                 {aboutButton}
             </Box>
         );

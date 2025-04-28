@@ -24,7 +24,7 @@
         but fixes [FFx + Safari] [resize window down + scroll to the right] bug.
         width: 100%;
     */
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: $menu-bar-standard-font-size;
     font-weight: bold;
     background-color: $looks-secondary;
@@ -47,6 +47,19 @@
     vertical-align: middle;
 }
 
+.mailIcon {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px; /* İkon ile metin arası boşluk */
+    vertical-align: middle;
+}
+
+.menuBarButton {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    gap: 8px; /* İkon ve metin arası eşit boşluk */
+}
 .scratch-logo.clickable {
     cursor: pointer;
 }

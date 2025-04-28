@@ -1,8 +1,8 @@
 {
   "name": "scratch-gui",
   "version": "5.1.47",
-  "description": "Graphical User Interface for creating and running Scratch 3.0 projects",
-  "author": "Massachusetts Institute of Technology",
+  "description": "KODKIT Early is a Scratch 3.0 GUI for KODKIT, a platform for creating and sharing interactive stories, games, and animations.",
+  "author": "Ragno Games",
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/scratchfoundation/scratch-gui#readme",
   "repository": {
@@ -28,6 +28,7 @@
     "start-electron": "electron .",
     "package": "electron-packager . KODKIT --platform=win32 --arch=x64 --out=dist --icon=./static/kodkitlogo.ico",
     "dist": "electron-builder",
+    "dist:all": "electron-builder -wml",
     "dist:win": "electron-builder --win"
   },
   "build": {
@@ -44,6 +45,11 @@
       "node_modules/**/*",
       "package.json"
     ],
+    "mac": {
+    "target": "dmg",
+    "icon": "./static/kodkitlogo.icns",
+    "category": "public.app-category.developer-tools"
+  },
     "win": {
       "target": "nsis",
       "icon": "./static/kodkitlogo.ico"
@@ -89,6 +95,7 @@
     "lodash.defaultsdeep": "^4.6.1",
     "lodash.omit": "^4.5.0",
     "lodash.throttle": "^4.0.1",
+    "lucide-react": "^0.263.1",
     "minilog": "^3.1.0",
     "omggif": "^1.0.9",
     "papaparse": "^5.3.0",
