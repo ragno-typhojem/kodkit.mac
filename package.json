@@ -1,8 +1,8 @@
 {
   "name": "scratch-gui",
-  "version": "5.1.47",
+  "version": "1.0.1",
   "description": "KODKIT Early is a Scratch 3.0 GUI for KODKIT, a platform for creating and sharing interactive stories, games, and animations.",
-  "author": "Ragno Games",
+  "author": "Ragno Games/Mustafa Berke Simsekler",
   "license": "AGPL-3.0-only",
   "homepage": "https://github.com/scratchfoundation/scratch-gui#readme",
   "repository": {
@@ -33,7 +33,7 @@
   },
   "build": {
     "appId": "com.ragnogameskodkit.app",
-    "productName": "KODKIT Early",
+    "productName": "KODKIT V.0.1.1",
     "directories": {
       "output": "dist"
     },
@@ -46,10 +46,10 @@
       "package.json"
     ],
     "mac": {
-    "target": "dmg",
-    "icon": "./static/kodkitlogo.icns",
-    "category": "public.app-category.developer-tools"
-  },
+      "target": "dmg",
+      "icon": "./static/kodkitlogo.icns",
+      "category": "public.app-category.developer-tools"
+    },
     "win": {
       "target": "nsis",
       "icon": "./static/kodkitlogo.ico"
